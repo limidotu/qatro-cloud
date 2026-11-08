@@ -1,0 +1,18 @@
+name: Start Qatro
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: qatro-server-power
+  cancel-in-progress: false
+jobs:
+  start:
+    uses: ./.github/workflows/_control.yml
+    with:
+      action: start
+    secrets:
+      OCI_TENANCY_OCID: ${{ secrets.OCI_TENANCY_OCID }}
+      OCI_USER_OCID: ${{ secrets.OCI_USER_OCID }}
+      OCI_FINGERPRINT: ${{ secrets.OCI_FINGERPRINT }}
+      OCI_PRIVATE_KEY: ${{ secrets.OCI_PRIVATE_KEY }}

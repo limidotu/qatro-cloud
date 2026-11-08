@@ -1,0 +1,21 @@
+{
+  "_config_version": 51,
+  "model": {
+    "provider": "opencode-acp",
+    "default": "opencode/deepseek-v4.1-flash-free"
+  },
+  "providers": {
+    "opencode-acp": {
+      "stale_timeout_seconds": 300,
+      "request_timeout_seconds": 300
+    }
+  },
+  "fallback_providers": [
+    {"provider": "opencode-acp", "model": "glm-5.3-flash-free"},
+    {"provider": "opencode-acp", "model": "mimo-v2.6-flash-free"}
+  ],
+  "plugins": {"enabled": [], "disabled": []},
+  "terminal": {"backend": "local", "cwd": "/home/qatro/workspace"},
+  "memory": {"memory_enabled": true, "user_profile_enabled": true},
+  "telemetry": {"shared_metrics": {"enabled": false, "offer_version": 2}}
+}

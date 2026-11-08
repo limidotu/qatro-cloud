@@ -1,0 +1,1 @@
+{"name":"qatro-cloud","private":true,"type":"module","scripts":{"test":"node --test tests/site.test.js"}}

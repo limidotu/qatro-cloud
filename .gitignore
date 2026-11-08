@@ -1,0 +1,15 @@
+.env
+.env.*
+!.env.example
+.private/
+*.pem
+*.key
+*.db
+*.db-*
+*.tar.gz
+__pycache__/
+.venv/
+.terraform/
+*.tfstate*
+*.tfvars
+.DS_Store

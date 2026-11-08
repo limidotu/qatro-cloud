@@ -1,0 +1,28 @@
+[Unit]
+Description=Qatro Discord assistant
+Wants=network-online.target
+After=network-online.target
+ConditionPathExists=/home/qatro/.hermes/.qatro-ready
+
+[Service]
+Type=simple
+User=qatro
+Group=qatro
+WorkingDirectory=/home/qatro/workspace
+Environment=HOME=/home/qatro
+Environment=HERMES_HOME=/home/qatro/.hermes
+Environment=HERMES_OPENCODE_ACP_COMMAND=/home/qatro/.local/bin/opencode
+Environment=HERMES_OPENCODE_ACP_CWD=/home/qatro/workspace
+Environment=HERMES_GATEWAY_LOCK_DIR=/home/qatro/.hermes/gateway-locks
+Environment=PATH=/home/qatro/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ExecStart=/home/qatro/.local/bin/hermes gateway run
+Restart=on-failure
+RestartSec=10
+KillSignal=SIGTERM
+TimeoutStopSec=120
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
