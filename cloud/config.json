@@ -16,6 +16,8 @@
   ],
   "plugins": {"enabled": [], "disabled": []},
   "terminal": {"backend": "local", "cwd": "/home/qatro/workspace"},
+  "max_concurrent_sessions": 1,
+  "stt": {"enabled": false},
   "memory": {"memory_enabled": true, "user_profile_enabled": true},
   "telemetry": {"shared_metrics": {"enabled": false, "offer_version": 2}}
 }

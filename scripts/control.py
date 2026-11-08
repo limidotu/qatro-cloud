@@ -9,15 +9,18 @@ import sys
 from pathlib import Path
 
 SHAPE = "VM.Standard.A1.Flex"
+MICRO = "VM.Standard.E2.1.Micro"
 TAG = "qatro-managed"
 
 
 def validate_instance(instance):
     if (instance.freeform_tags or {}).get(TAG) != "true":
         raise ValueError("The configured instance does not have Qatro's management tag.")
+    if instance.shape == MICRO:
+        return
     shape = instance.shape_config
     if instance.shape != SHAPE or shape is None:
-        raise ValueError("The instance is not an Oracle A1 server.")
+        raise ValueError("The instance is not an approved Oracle free shape.")
     if not (0 < shape.ocpus <= 2 and 0 < shape.memory_in_gbs <= 12):
         raise ValueError("The instance exceeds this project's free-size limits.")
 
@@ -40,11 +43,12 @@ def operate(client, instance_id, action):
 
 
 def result(instance, message):
+    micro = instance.shape == MICRO
     return {
         "state": instance.lifecycle_state,
         "shape": instance.shape,
-        "cores": instance.shape_config.ocpus,
-        "memory_gb": instance.shape_config.memory_in_gbs,
+        "cores": "shared" if micro else instance.shape_config.ocpus,
+        "memory_gb": 1 if micro else instance.shape_config.memory_in_gbs,
         "message": message,
         "note": "A running server does not prove the Discord bot is healthy.",
     }
@@ -59,7 +63,7 @@ def write_summary(data):
             "# Qatro server\n\n"
             f"**Server state: {safe_state}**\n\n"
             f"{data['message']}\n\n"
-            "The server uses an Oracle A1 allocation of at most 2 cores and 12 GB RAM.\n\n"
+            f"Shape: {data['shape']}. Memory: {data['memory_gb']} GB.\n\n"
             "Server power state does not prove that Qatro can answer in Discord.\n"
             "A stopped server cannot answer messages.\n",
             encoding="utf-8",

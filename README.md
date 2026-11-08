@@ -3,7 +3,12 @@
 Deploy Qatro on an Oracle Always Free ARM server. Use the GitHub Pages control
 page to open authenticated actions for Start, Stop, and Status.
 
-The target is 2 A1 cores, 12 GB RAM, and a 50 GB boot disk. Free availability
+The preferred target is 2 A1 cores, 12 GB RAM, and a 50 GB boot disk. Montreal
+rejected both 2-core and 1-core A1 requests because of host capacity on November
+8, 2026. The active deployment uses the fixed Always Free AMD micro shape with
+1 GB RAM and a 50 GB disk. Runtime checks must pass before the final migration.
+The controller accepts either approved shape. The provisioning tool still
+targets A1 for a future migration. Free availability
 depends on Oracle capacity and reclamation rules. Model availability depends on
 OpenCode's free offers. This project does not guarantee a zero bill or uptime.
 
@@ -113,8 +118,8 @@ Allow group QatroControl to manage instances in compartment id YOUR_COMPARTMENT_
 ```
 
 Use the identity-domain form of the group name where the account requires it.
-The controller checks the instance's `qatro-managed=true` tag and free-size
-limits before any operation. Its credential cannot create or delete resources
+The controller checks the instance's `qatro-managed=true` tag and approved free
+shape before any operation. Its credential cannot create or delete resources
 when the policy restricts it as shown.
 
 Set these GitHub Actions secrets:

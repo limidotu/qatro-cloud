@@ -33,6 +33,11 @@ class ControlTests(unittest.TestCase):
     def test_status_cannot_change_power(self):
         c = Client(instance()); operate(c, "test-instance", "status"); self.assertEqual(c.calls, [])
 
+    def test_fixed_free_amd_shape_needs_no_flexible_shape_config(self):
+        c = Client(instance(shape="VM.Standard.E2.1.Micro", shape_config=None))
+        _, _, changed = operate(c, "test-instance", "start")
+        self.assertTrue(changed)
+
     def test_rejects_unrelated_or_oversized_servers(self):
         for value in [instance(freeform_tags={}), instance(shape="VM.Standard.E5.Flex"), instance(shape_config=NS(ocpus=4, memory_in_gbs=24))]:
             with self.subTest(value=value):
