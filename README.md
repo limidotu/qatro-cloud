@@ -110,17 +110,14 @@ can migrate, but those capabilities need separate Linux replacements.
 
 ## Connect the GitHub controls
 
-Use a dedicated Oracle identity for control. Limit it to reading and changing
-the power state of this one instance. The following policy is a template:
-
-```text
-Allow group QuatroControl to manage instances in compartment id YOUR_COMPARTMENT_OCID where all {target.instance.id = 'YOUR_INSTANCE_OCID', any {request.permission = 'INSTANCE_READ', request.permission = 'INSTANCE_POWER_ACTIONS'}}
-```
-
-Use the identity-domain form of the group name where the account requires it.
-The controller checks the instance's `qatro-managed=true` tag and approved free
-shape before any operation. Its credential cannot create or delete resources
-when the policy restricts it as shown.
+Use a dedicated Oracle identity for control. Oracle's core-service policy
+reference does not document an instance-ID condition for Compute power actions.
+Do not use an unverified instance-ID condition to claim access is limited to one
+server. A dedicated compartment can limit the account to instances inside that
+compartment, provided no other instances are added. Oracle's power permission
+also allows actions such as restart and forced shutdown. The control page offers
+only Start, Stop, and Status. Do not enable it until the policy scope and live
+checks are confirmed.
 
 Set these GitHub Actions secrets:
 
