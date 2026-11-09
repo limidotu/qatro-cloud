@@ -25,7 +25,7 @@ if (typeof document !== 'undefined') {
     $('#connection-status').textContent = ready ? 'Controls connected' : 'Setup pending';
     $('#connection-status').classList.toggle('connected', ready);
     $('#connection-description').textContent = ready
-      ? 'Server controls are ready. Quatro is not running in the cloud yet.'
+      ? 'Server controls are ready. The cloud gateway is connected to Discord, but replies still need a test.'
       : 'Server controls will be available after their connection is tested.';
     $('#setup-notice').hidden = ready;
     $('#repo-label').textContent = repo || 'QATRO / PERSONAL CLOUD';
