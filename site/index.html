@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="A small home for Qatro. Start, stop, and check your personal cloud assistant.">
+  <meta name="description" content="A small home for Quatro. Start, stop, and check your personal cloud assistant.">
   <meta name="theme-color" content="#f5f2eb">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'; object-src 'none'">
-  <title>Qatro · Cloud controls</title>
+  <title>Quatro · Cloud controls</title>
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
   <script type="module" src="app.js"></script>
@@ -14,24 +14,24 @@
 <body>
   <div class="shell">
     <header class="topbar">
-      <a class="brand" href="./" aria-label="Qatro home"><span class="mark">q<span>·</span></span><span>qatro<span class="brand-sub"> / cloud</span></span></a>
+      <a class="brand" href="./" aria-label="Quatro home"><span class="mark">q<span>·</span></span><span>qatro<span class="brand-sub"> / cloud</span></span></a>
       <button class="text-button" id="settings-button" type="button">Connection <span aria-hidden="true">↗</span></button>
     </header>
     <main>
       <div class="eyebrow"><span class="tiny-square"></span> YOUR ASSISTANT, A LITTLE FURTHER FROM HOME</div>
       <section class="intro" aria-labelledby="title">
-        <h1 id="title">A home for<br>Qatro<span class="orange">.</span></h1>
+        <h1 id="title">A home for<br>Quatro<span class="orange">.</span></h1>
         <p>Here when you need him.<br>Your PC can take the night off.</p>
       </section>
       <section class="control-card" aria-labelledby="controls-title">
         <div class="card-heading"><div><span class="eyebrow">CONTROL ROOM / 01</span><h2 id="controls-title">Make yourself at home.</h2></div><span class="status" id="connection-status">Setup pending</span></div>
         <p class="control-description" id="connection-description">Connect this page to your GitHub repository to use the controls.</p>
         <div class="actions">
-          <a class="action primary" id="start" aria-disabled="true" target="_blank" rel="noopener noreferrer"><span class="action-icon" aria-hidden="true">↗</span><span><strong>Start Qatro</strong><small>Bring the server online</small></span><span class="action-arrow" aria-hidden="true">→</span></a>
-          <a class="action" id="stop" aria-disabled="true" target="_blank" rel="noopener noreferrer"><span class="action-icon pause-icon" aria-hidden="true">Ⅱ</span><span><strong>Stop Qatro</strong><small>Give the server a rest</small></span><span class="action-arrow" aria-hidden="true">→</span></a>
+          <a class="action primary" id="start" aria-disabled="true" target="_blank" rel="noopener noreferrer"><span class="action-icon" aria-hidden="true">↗</span><span><strong>Start Quatro</strong><small>Bring the server online</small></span><span class="action-arrow" aria-hidden="true">→</span></a>
+          <a class="action" id="stop" aria-disabled="true" target="_blank" rel="noopener noreferrer"><span class="action-icon pause-icon" aria-hidden="true">Ⅱ</span><span><strong>Stop Quatro</strong><small>Give the server a rest</small></span><span class="action-arrow" aria-hidden="true">→</span></a>
           <a class="action" id="status" aria-disabled="true" target="_blank" rel="noopener noreferrer"><span class="action-icon" aria-hidden="true">◎</span><span><strong>Check status</strong><small>Read the latest server state</small></span><span class="action-arrow" aria-hidden="true">→</span></a>
         </div>
-        <div class="confirmation-note"><span aria-hidden="true">↳</span><p>Each control opens GitHub. Sign in, then select <strong>Run workflow</strong>. Qatro cannot reply while his server is stopped.</p></div>
+        <div class="confirmation-note"><span aria-hidden="true">↳</span><p>Each control opens GitHub. Sign in, then select <strong>Run workflow</strong>. Quatro cannot reply while his server is stopped.</p></div>
         <p class="notice" id="setup-notice" role="status">Cloud setup is pending. The controls will activate after the server and its access settings are ready.</p>
       </section>
       <section class="details" aria-label="Hosting details">
@@ -42,6 +42,6 @@
     </main>
     <footer><span>A small home for a curious assistant.</span><span id="repo-label">QATRO / PERSONAL CLOUD</span></footer>
   </div>
-  <dialog id="settings"><form method="dialog"><div class="dialog-top"><h2>Connect your controls.</h2><button aria-label="Close" class="close" value="cancel">×</button></div><p>Enter the GitHub repository that contains Qatro’s control workflows.</p><label for="repository">GitHub repository</label><input id="repository" name="repository" placeholder="your-name/qatro-cloud" autocomplete="off" spellcheck="false" maxlength="140"><p class="field-help">A repository name only. Do not enter a password or token.</p><p class="error" id="settings-error" role="alert"></p><button class="save" id="save-settings" type="button">Save connection <span aria-hidden="true">→</span></button></form></dialog>
+  <dialog id="settings"><form method="dialog"><div class="dialog-top"><h2>Connect your controls.</h2><button aria-label="Close" class="close" value="cancel">×</button></div><p>Enter the GitHub repository that contains Quatro’s control workflows.</p><label for="repository">GitHub repository</label><input id="repository" name="repository" placeholder="your-name/qatro-cloud" autocomplete="off" spellcheck="false" maxlength="140"><p class="field-help">A repository name only. Do not enter a password or token.</p><p class="error" id="settings-error" role="alert"></p><button class="save" id="save-settings" type="button">Save connection <span aria-hidden="true">→</span></button></form></dialog>
 </body>
 </html>

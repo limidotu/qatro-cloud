@@ -1,6 +1,6 @@
-# Qatro cloud
+# Quatro cloud
 
-Deploy Qatro on an Oracle Always Free ARM server. Use the GitHub Pages control
+Deploy Quatro on an Oracle Always Free ARM server. Use the GitHub Pages control
 page to open authenticated actions for Start, Stop, and Status.
 
 The preferred target is 2 A1 cores, 12 GB RAM, and a 50 GB boot disk. Montreal
@@ -114,7 +114,7 @@ Use a dedicated Oracle identity for control. Limit it to reading and changing
 the power state of this one instance. The following policy is a template:
 
 ```text
-Allow group QatroControl to manage instances in compartment id YOUR_COMPARTMENT_OCID where all {target.instance.id = 'YOUR_INSTANCE_OCID', any {request.permission = 'INSTANCE_READ', request.permission = 'INSTANCE_POWER_ACTIONS'}}
+Allow group QuatroControl to manage instances in compartment id YOUR_COMPARTMENT_OCID where all {target.instance.id = 'YOUR_INSTANCE_OCID', any {request.permission = 'INSTANCE_READ', request.permission = 'INSTANCE_POWER_ACTIONS'}}
 ```
 
 Use the identity-domain form of the group name where the account requires it.
@@ -135,8 +135,8 @@ Set these repository variables:
 - `OCI_INSTANCE_OCID`
 - `QATRO_CLOUD_READY`: keep `false` until live checks pass
 
-Enable GitHub Pages with GitHub Actions as its source. Run **Check Qatro status**.
-After the live checks pass, set `QATRO_CLOUD_READY=true` and run **Publish Qatro
+Enable GitHub Pages with GitHub Actions as its source. Run **Check Quatro status**.
+After the live checks pass, set `QATRO_CLOUD_READY=true` and run **Publish Quatro
 controls**. The build writes the repository name into the page configuration.
 No credentials enter the Pages artifact.
 

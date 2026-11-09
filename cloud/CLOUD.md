@@ -1,4 +1,4 @@
-# Qatro's cloud workspace
+# Quatro's cloud workspace
 
 This server runs Linux. Its workspace is `/home/qatro/workspace`.
 
