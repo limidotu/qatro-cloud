@@ -19,7 +19,9 @@ bash "$installer" --branch main --commit 4d04303818b61bf3aa09278af48356315515965
 hermes pm env node npm | python3 -c '
 import json, os, subprocess, sys
 env = dict(os.environ)
-env.update(json.load(sys.stdin))
+exports = json.load(sys.stdin)
+env.update(exports)
+env["PATH"] = exports.get("PATH", "") + os.pathsep + os.defpath
 subprocess.run(["npm", "install", "--global", "--allow-scripts=@opencode/cli", "--prefix", os.path.expanduser("~/.local"), "@opencode/cli@2.2.5"], env=env, check=True)
 '
 echo "The runtime is installed. Keep the gateway stopped until migration is complete."
