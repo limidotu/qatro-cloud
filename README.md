@@ -186,3 +186,16 @@ The cloud setup registers only these four commands with
 `scripts/register_chat_commands.py --apply`. It does not overwrite existing
 commands. The bot token is passed privately in the environment. The gateway's
 Discord command synchronization stays off so it does not replace other commands.
+
+## Keep the skill index small
+
+The Discord gateway lists skill names without their descriptions. The files stay
+available through `skills_list` and `skill_view`. This reduces the information
+sent for each new chat. Quatro may need to browse skills when a name is unclear.
+
+The pinned Hermes source has a guarded local patch from
+`scripts/compact_skill_patch.py`. The service enables it with
+`cloud/compact-skills.conf`. After a Hermes update, check the patch before
+restarting the service. The script refuses an unfamiliar renderer rather than
+changing it blindly. The patch is not a replacement for the model's context or
+the provider's daily usage limits.
