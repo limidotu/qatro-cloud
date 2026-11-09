@@ -167,3 +167,22 @@ bash -n cloud/bootstrap.sh
 - [OpenCode models and free offers](https://opencode.ai/docs/console/models/)
 - [Cloudflare Workers AI free allowance](https://developers.cloudflare.com/workers-ai/platform/pricing/)
 - [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
+
+## Switch Discord chats
+
+Quatro has four Discord slash commands. Type `/` in the conversation and choose
+Quatro's command from Discord's picker.
+
+1. Use `/new` to start a fresh chat.
+2. Use `/title name` to name the current chat.
+3. Use `/sessions` or `/resume` to see named chats.
+4. Use `/resume name` or `/resume number` to switch back to one.
+
+Each chat keeps its own conversation history. Quatro's shared memory and
+personality still apply. Starting a chat does not delete older conversations.
+Very large imported chats can exceed the cloud model's context limit.
+
+The cloud setup registers only these four commands with
+`scripts/register_chat_commands.py --apply`. It does not overwrite existing
+commands. The bot token is passed privately in the environment. The gateway's
+Discord command synchronization stays off so it does not replace other commands.
