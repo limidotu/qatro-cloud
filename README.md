@@ -9,8 +9,7 @@ rejected both 2-core and 1-core A1 requests because of host capacity on November
 1 GB RAM and a 50 GB disk. Runtime checks must pass before the final migration.
 The controller accepts either approved shape. The provisioning tool still
 targets A1 for a future migration. Free availability
-depends on Oracle capacity and reclamation rules. Model availability depends on
-OpenCode's free offers. This project does not guarantee a zero bill or uptime.
+depends on Oracle capacity and reclamation rules. Model availability depends on the selected provider's free offers. This project does not guarantee a zero bill or uptime.
 
 The live Windows setup is separate. This repository contains no personal memory,
 conversation history, Discord credentials, or cloud keys.
@@ -19,9 +18,13 @@ conversation history, Discord credentials, or cloud keys.
 
 - The control page and workflows are implemented.
 - The Always Free server and dedicated control identity are provisioned.
-- Quatro still runs on Windows while free cloud inference is tested.
+- The cloud gateway connects to Discord. A real Discord reply remains to be checked.
+- The PC gateway and its two restart tasks are disabled during the cloud switch.
+- The active cloud configuration uses Cloudflare Workers AI on its free plan.
+  Requests stop when its daily free allowance is exhausted.
 - The page can enable server controls after power tests pass. A running server does not mean the cloud bot is active.
-- The default configuration includes only OpenCode free model IDs.
+- The initial configuration includes only OpenCode free model IDs. The current
+  server uses a separately configured Cloudflare free model.
 
 ## Account setup
 
@@ -99,8 +102,15 @@ private channel. Preserve the Discord user allowlist and channel behavior.
 Do not transfer unrelated provider credentials. Put `cloud/CLOUD.md` in the
 workspace so the agent knows that historical PC paths are unavailable.
 
-Make sure the custom provider imports, OpenCode advertises the chosen model,
-and a local ACP exchange works. Then create the `.qatro-ready` marker in the
+Choose and test a free inference provider before enabling the gateway. The
+initial OpenCode free models returned a usage-limit error from this server.
+The current cloud setup uses Cloudflare Workers AI with a limited token stored
+only on the server. It uses `@cf/openai/gpt-oss-120b` and a 128,000-token
+context setting. A direct model and tool-call check, plus a Hermes prompt,
+passed. Cloudflare receives the prompts and relevant conversation context.
+Its free allowance is limited and model availability can change.
+
+Make sure the selected model responds through Hermes. Then create the `.qatro-ready` marker in the
 cloud Hermes home. Enable and start `qatro.service`. Test a Discord reply and
 reboot recovery before disabling the Windows startup entry. Keep only one
 gateway connected during the final switch.
@@ -155,4 +165,5 @@ bash -n cloud/bootstrap.sh
 - [Oracle access permissions](https://docs.oracle.com/en-us/iaas/Content/Identity/Reference/corepolicyreference.htm)
 - [Hermes platform support](https://hermes-agent.nousresearch.com/docs/getting-started/platform-support)
 - [OpenCode models and free offers](https://opencode.ai/docs/console/models/)
+- [Cloudflare Workers AI free allowance](https://developers.cloudflare.com/workers-ai/platform/pricing/)
 - [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
