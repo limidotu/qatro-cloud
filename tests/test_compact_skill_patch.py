@@ -10,14 +10,15 @@ spec.loader.exec_module(patcher)
 
 class CompactSkillPatchTest(unittest.TestCase):
     def test_patch_is_idempotent_and_keeps_names(self):
-        fixture = 'import os\ndef render(skills_by_category, compact_categories):\n' + patcher.OLD + '    return demoted\n\ndef note():\n    return (\n' + patcher.OLD_NOTE + '        "normally")\n'
+        fixture = 'import os\ndef render(skills_by_category, compact_categories):\n' + patcher.OLD + patcher.ANCHOR + '    return demoted\n\ndef note():\n    return (\n' + patcher.OLD_NOTE + '        "normally")\n'
         with TemporaryDirectory() as directory:
             p = Path(directory) / 'renderer.py'
             p.write_text(fixture, encoding='utf-8')
             self.assertTrue(patcher.apply(p))
             self.assertFalse(patcher.apply(p))
             namespace = {}
-            exec(compile(p.read_text(encoding='utf-8'), str(p), 'exec'), namespace)
+            code = 'import os\ndef render(skills_by_category, compact_categories):\n' + patcher.NEW + '    return demoted\n'
+            exec(compile(code, str(p), 'exec'), namespace)
             from unittest.mock import patch
             with patch.dict('os.environ', {'QUATRO_COMPACT_SKILLS': '1'}):
                 self.assertEqual(namespace['render']({'one': [], 'two': []}, None), {'one', 'two'})
