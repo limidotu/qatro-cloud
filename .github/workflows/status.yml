@@ -1,4 +1,4 @@
-name: Check Qatro status
+name: Check Quatro status
 on:
   workflow_dispatch:
 permissions:

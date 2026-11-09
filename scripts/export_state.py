@@ -1,4 +1,4 @@
-"""Export Qatro's memory and skills to a private local archive. Exclude credentials."""
+"""Export Quatro's memory and skills to a private local archive. Exclude credentials."""
 from __future__ import annotations
 import argparse
 from contextlib import closing

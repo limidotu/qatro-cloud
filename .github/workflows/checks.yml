@@ -1,4 +1,4 @@
-name: Check Qatro cloud tools
+name: Check Quatro cloud tools
 on:
   push:
   pull_request:

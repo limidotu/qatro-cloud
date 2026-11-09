@@ -1,4 +1,4 @@
-name: Stop Qatro
+name: Stop Quatro
 on:
   workflow_dispatch:
 permissions:

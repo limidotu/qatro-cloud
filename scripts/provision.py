@@ -18,7 +18,7 @@ def check_allowance(instances, disk_gb):
     cores = sum(x.shape_config.ocpus for x in active if x.shape == SHAPE)
     memory = sum(x.shape_config.memory_in_gbs for x in active if x.shape == SHAPE)
     if cores != 0 or memory != 0:
-        raise ValueError("This account already has A1 resources. Review the account allocation before creating Qatro.")
+        raise ValueError("This account already has A1 resources. Review the account allocation before creating Quatro.")
     if disk_gb + 50 > 200:
         raise ValueError("A new 50 GB disk would exceed the account's 200 GB free disk allowance.")
     return {"cores": 2, "memory_gb": 12, "boot_disk_gb": 50, "existing_disk_gb": disk_gb}
@@ -30,7 +30,7 @@ def cloud_init():
     return "#cloud-config\n" + json.dumps({
         "users": ["default", {"name": "qatro", "shell": "/bin/bash", "lock_passwd": True}],
         "package_update": True,
-        "packages": ["curl", "git", "ca-certificates", "unzip", "python3"],
+        "packages": ["curl", "git", "ca-certificates", "unzip", "python3", "libatomic1"],
         "write_files": [
             file("/opt/qatro-setup/bootstrap.sh", (ROOT / "cloud/bootstrap.sh").read_text(encoding="utf-8"), "0755"),
             file("/etc/systemd/system/qatro.service", (ROOT / "cloud/qatro.service").read_text(encoding="utf-8"), "0644"),
@@ -99,7 +99,7 @@ def create(oci, compute, network, plan, ssh_key, admin_cidr):
     subnet = resource("subnet", lambda: network.create_subnet(m.CreateSubnetDetails(compartment_id=cid, vcn_id=vcn, cidr_block="10.42.1.0/24", display_name="qatro-cloud", dns_label="qatro", route_table_id=route, security_list_ids=[security], freeform_tags=TAGS)))
     oci.wait_until(network, network.get_subnet(subnet), "lifecycle_state", "AVAILABLE", max_wait_seconds=180)
     if "instance" in state:
-        raise ValueError("A Qatro instance is already recorded. Use its control actions instead of creating another.")
+        raise ValueError("A Quatro instance is already recorded. Use its control actions instead of creating another.")
     details = m.LaunchInstanceDetails(
         compartment_id=cid, availability_domain=plan["availability_domain"], display_name="qatro",
         shape=SHAPE, shape_config=m.LaunchInstanceShapeConfigDetails(ocpus=2, memory_in_gbs=12),
@@ -110,7 +110,7 @@ def create(oci, compute, network, plan, ssh_key, admin_cidr):
     )
     response = compute.launch_instance(details, opc_retry_token="qatro-" + state["vcn"].split(".")[-1][:48])
     save("instance", response.data.id)
-    print("Qatro's server was created. The gateway remains stopped until its private state is migrated.")
+    print("Quatro's server was created. The gateway remains stopped until its private state is migrated.")
 
 
 def main():

@@ -1,4 +1,4 @@
-name: Start Qatro
+name: Start Quatro
 on:
   workflow_dispatch:
 permissions:

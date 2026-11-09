@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def prepare(home: Path, workspace: Path, opencode: Path):
     if os.name == "nt" or not str(home).startswith("/home/qatro/"):
-        raise ValueError("Run this tool on Qatro's Linux server, with a home below /home/qatro.")
+        raise ValueError("Run this tool on Quatro's Linux server, with a home below /home/qatro.")
     if not home.is_dir() or not workspace.is_dir() or not opencode.is_file():
         raise ValueError("The migrated home, workspace, and OpenCode executable must exist.")
     ready = home / ".qatro-ready"

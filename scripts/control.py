@@ -15,7 +15,7 @@ TAG = "qatro-managed"
 
 def validate_instance(instance):
     if (instance.freeform_tags or {}).get(TAG) != "true":
-        raise ValueError("The configured instance does not have Qatro's management tag.")
+        raise ValueError("The configured instance does not have Quatro's management tag.")
     if instance.shape == MICRO:
         return
     shape = instance.shape_config
@@ -60,11 +60,11 @@ def write_summary(data):
     if summary:
         safe_state = re.sub(r"[^A-Z_]", "", data["state"])
         Path(summary).write_text(
-            "# Qatro server\n\n"
+            "# Quatro server\n\n"
             f"**Server state: {safe_state}**\n\n"
             f"{data['message']}\n\n"
             f"Shape: {data['shape']}. Memory: {data['memory_gb']} GB.\n\n"
-            "Server power state does not prove that Qatro can answer in Discord.\n"
+            "Server power state does not prove that Quatro can answer in Discord.\n"
             "A stopped server cannot answer messages.\n",
             encoding="utf-8",
         )

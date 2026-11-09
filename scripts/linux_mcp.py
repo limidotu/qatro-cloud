@@ -1,4 +1,4 @@
-"""Shell and file tools for Qatro's Linux workspace. JSON-RPC over standard input."""
+"""Shell and file tools for Quatro's Linux workspace. JSON-RPC over standard input."""
 from __future__ import annotations
 import json
 import os
