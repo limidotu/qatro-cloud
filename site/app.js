@@ -25,8 +25,8 @@ if (typeof document !== 'undefined') {
     $('#connection-status').textContent = ready ? 'Controls connected' : 'Setup pending';
     $('#connection-status').classList.toggle('connected', ready);
     $('#connection-description').textContent = ready
-      ? 'Check status in GitHub for the current server state. This page does not monitor Quatro.'
-      : 'Cloud setup must finish before these controls can operate Quatro’s server.';
+      ? 'Server controls are ready. Quatro is not running in the cloud yet.'
+      : 'Server controls will be available after their connection is tested.';
     $('#setup-notice').hidden = ready;
     $('#repo-label').textContent = repo || 'QATRO / PERSONAL CLOUD';
     for (const action of ['start', 'stop', 'status']) {

@@ -18,9 +18,9 @@ conversation history, Discord credentials, or cloud keys.
 ## State
 
 - The control page and workflows are implemented.
-- Oracle provisioning and Linux migration tools are implemented.
-- Live deployment needs Oracle account access and GitHub authentication.
-- The page keeps its controls inactive until `QATRO_CLOUD_READY` is `true`.
+- The Always Free server and dedicated control identity are provisioned.
+- Quatro still runs on Windows while free cloud inference is tested.
+- The page can enable server controls after power tests pass. A running server does not mean the cloud bot is active.
 - The default configuration includes only OpenCode free model IDs.
 
 ## Account setup
@@ -113,8 +113,8 @@ can migrate, but those capabilities need separate Linux replacements.
 Use a dedicated Oracle identity for control. Oracle's core-service policy
 reference does not document an instance-ID condition for Compute power actions.
 Do not use an unverified instance-ID condition to claim access is limited to one
-server. A dedicated compartment can limit the account to instances inside that
-compartment, provided no other instances are added. Oracle's power permission
+server. The Quatro compartment limits the account to instances inside that compartment.
+Do not add other instances to it without reviewing the policy. Oracle's power permission
 also allows actions such as restart and forced shutdown. The control page offers
 only Start, Stop, and Status. Do not enable it until the policy scope and live
 checks are confirmed.
@@ -133,8 +133,8 @@ Set these repository variables:
 - `QATRO_CLOUD_READY`: keep `false` until live checks pass
 
 Enable GitHub Pages with GitHub Actions as its source. Run **Check Quatro status**.
-After the live checks pass, set `QATRO_CLOUD_READY=true` and run **Publish Quatro
-controls**. The build writes the repository name into the page configuration.
+After server power checks pass, set `QATRO_CLOUD_READY=true` and run **Publish Quatro
+controls**. Keep the page notice accurate until the Discord migration passes. The build writes the repository name into the page configuration.
 No credentials enter the Pages artifact.
 
 Start and Stop share a concurrency group. Stop requests a graceful cloud
