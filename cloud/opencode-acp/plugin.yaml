@@ -1,0 +1,4 @@
+name: opencode-acp-provider
+kind: model-provider
+version: 0.2.0
+description: OpenCode agent over ACP (local subprocess)
