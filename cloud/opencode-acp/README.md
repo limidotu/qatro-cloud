@@ -11,10 +11,10 @@ earlier provider remains next to the installed provider as
 `__init__.py.quatro-original`. The model settings before the switch are in
 `~/.hermes/quatro-model-before.yaml` on the server.
 
-OpenCode free models have usage limits and availability can change. A direct
-ACP test received a DeepSeek reply, but the full gateway test overloaded the
-1 GB server. The Cloudflare model was restored as the default. Automatic
-fallback has not been tested end to end. The user's Windows-only `pc` MCP
-server is disabled on Linux.
+OpenCode free models have usage limits and availability can change. DeepSeek
+is the configured default because Cloudflare reached its daily free limit. A
+direct ACP test received a reply, but the full gateway test overloaded the
+1 GB server. Automatic Cloudflare fallback has not been tested end to end.
+The user's Windows-only `pc` MCP server is disabled on Linux.
 
 Run `python cloud/opencode-acp/test_safe_acp.py` to test the model guard.
