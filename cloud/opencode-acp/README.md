@@ -21,7 +21,8 @@ limit was reached. Both models were verified live through the provider:
 DeepSeek and GLM each returned a reply. The 1 GB server remains slow, and
 session creation occasionally fails with a transient
 `Internal service failure` while OpenCode's location plugins are still
-activating; retrying the request succeeds.
+activating; the ACP client retries `session/new` up to three times inside
+the caller's timeout instead of failing the turn.
 The user's Windows-only `pc` MCP server is disabled on Linux.
 
 Run `python cloud/opencode-acp/test_safe_acp.py` to test the model guard.
