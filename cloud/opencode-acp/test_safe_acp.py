@@ -46,6 +46,11 @@ class SafeModelTests(unittest.TestCase):
         self.assertEqual(self.client._run_prompt('test', timeout_seconds=2, model=module._FREE_MODEL), ('ok', ''))
         self.assertEqual(FakeACP.calls, ['session/set_config_option', 'session/prompt'])
 
+    def test_confirmed_glm_model_can_receive_prompt(self):
+        FakeACP.response_model = module._GLM_MODEL
+        self.assertEqual(self.client._run_prompt('test', timeout_seconds=2, model='glm-5.3-flash-free'), ('ok', ''))
+        self.assertEqual(FakeACP.calls, ['session/set_config_option', 'session/prompt'])
+
     def test_paid_model_is_rejected(self):
         with self.assertRaises(ValueError): self.client._run_prompt('test', timeout_seconds=2, model='opencode/paid')
         self.assertEqual(FakeACP.calls, [])

@@ -15,21 +15,30 @@ from typing import Any
 from providers import register_provider
 from providers.base import ProviderProfile
 
-_DEFAULT_COMMAND = Path(
-    os.environ.get(
-        "HERMES_OPENCODE_ACP_COMMAND",
-        str(Path.home() / "AppData" / "Roaming" / "npm" / "node_modules"
-            / "@opencode" / "cli" / "bin" / "opencode.exe"),
-    )
-)
+def _resolve_default_command() -> str:
+    """Env override, then the Linux opencode launchers, then the Windows default."""
+    env = os.environ.get("HERMES_OPENCODE_ACP_COMMAND", "").strip()
+    if env:
+        return env
+    for candidate in (Path.home() / ".local" / "bin" / "opencode-nice",
+                      Path.home() / ".local" / "bin" / "opencode"):
+        if candidate.exists():
+            return str(candidate)
+    return str(Path.home() / "AppData" / "Roaming" / "npm" / "node_modules"
+               / "@opencode" / "cli" / "bin" / "opencode.exe")
+
+
+_DEFAULT_COMMAND = Path(_resolve_default_command())
 _WORKDIR = os.environ.get("HERMES_OPENCODE_ACP_CWD", str(Path.home() / "workspace"))
 _FREE_MODEL = "opencode/deepseek-v4.1-flash-free"
+_GLM_MODEL = "opencode/glm-5.3-flash-free"
+_FREE_MODELS = (_FREE_MODEL, _GLM_MODEL)
 
 # Models the local `opencode acp` server currently advertises. The live ACP
 # picker is authoritative; this list keeps the Hermes picker populated when
 # the probe cannot run (for example, when OpenCode is not installed or is
 # still starting).
-_FALLBACK_MODEL_IDS = (_FREE_MODEL,)
+_FALLBACK_MODEL_IDS = _FREE_MODELS
 
 
 class OpenCodeACPProfile(ProviderProfile):
@@ -64,12 +73,12 @@ class OpenCodeACPProfile(ProviderProfile):
                 requested = str(model or _FREE_MODEL).strip()
                 if requested and "/" not in requested:
                     requested = f"opencode/{requested}"
-                if requested != _FREE_MODEL:
-                    raise ValueError("Only the configured free DeepSeek model is allowed.")
+                if requested not in _FREE_MODELS:
+                    raise ValueError("Only the configured free OpenCode models are allowed.")
                 with self._session(timeout_seconds) as (session, request):
                     selection = _model_selection_request(session, requested)
                     if selection is None:
-                        raise RuntimeError("The free DeepSeek model is unavailable.")
+                        raise RuntimeError("The requested free model is unavailable.")
                     result = request(*selection)
                     options = result.get("configOptions", []) if isinstance(result, dict) else []
                     option = next((item for item in options if isinstance(item, dict)
