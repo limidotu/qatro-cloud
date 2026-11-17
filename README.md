@@ -1,8 +1,9 @@
 # Quatro cloud
 
 Quatro runs on the single included free X Systems Discord bot server: 4 GB RAM,
-200% CPU and 10 GB disk. The Oracle Always Free AMD micro server keeps the old
-files as a backup. RAM and CPU are separate on each host.
+200% CPU and 10 GB disk. The Oracle Always Free AMD micro server is Quatro's
+personal server for projects, files, backups and small services. RAM and CPU
+are separate on each host.
 
 Use the [private dashboard](https://quatro-dashboard.lashtabeha-dmytro.workers.dev/)
 for chats, sessions, skills and settings. GitHub sign-in remains restricted to
@@ -10,8 +11,8 @@ its owner. Use the [X Systems panel](https://panel.xsystemshosting.com/server/ab
 for Start, Stop, Restart and current resource use.
 
 The [Pages control page](https://limidotu.github.io/qatro-cloud/) links to the
-primary host and clearly labels the old GitHub power workflows as Oracle
-backup controls. Those workflows do not control the X Systems container.
+primary host and clearly labels the GitHub power workflows as Oracle server
+controls. Those workflows do not control the X Systems container.
 
 ## Current deployment
 
@@ -24,13 +25,16 @@ backup controls. Those workflows do not control the X Systems container.
   private storage. This repository contains no private migration archive.
 - The old Oracle agent must stay stopped and disabled to avoid duplicate replies.
   Its files remain available for recovery.
+- A separate non-admin `quatro` account manages Oracle projects, data and backups.
+  User services continue after SSH disconnects. The account has a 650 MiB memory
+  limit. Private previews bind to loopback and need an SSH forward to view.
 - The Windows gateway and its restart tasks remain disabled.
 - The free host has account eligibility requirements and experienced network
   outages during testing. Keep an independent backup. No uptime is guaranteed.
 
-## Oracle backup provisioning
+## Oracle server provisioning
 
-The scripts below provision Oracle resources and control that backup host.
+The scripts below provision Oracle resources and control that personal server.
 They do not provision or manage the active X Systems container. The preferred
 Oracle ARM target remains 2 A1 cores and 12 GB RAM, but Montreal capacity was
 unavailable during setup. Never select a paid fallback.

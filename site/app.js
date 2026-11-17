@@ -25,8 +25,8 @@ if (typeof document !== 'undefined') {
     $('#connection-status').textContent = ready ? 'Controls connected' : 'Setup pending';
     $('#connection-status').classList.toggle('connected', ready);
     $('#connection-description').textContent = ready
-      ? 'These controls manage the Oracle backup server. Quatro runs on X Systems.'
-      : 'Oracle backup controls will be available after their connection is tested.';
+      ? 'Oracle hosts Quatro\'s projects, files, backups, and small services. His agent runs on X Systems.'
+      : 'Oracle server controls will be available after their connection is tested.';
     $('#setup-notice').hidden = ready;
     $('#repo-label').textContent = repo || 'QATRO / PERSONAL CLOUD';
     for (const action of ['start', 'stop', 'status']) {
