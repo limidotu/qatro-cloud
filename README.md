@@ -1,30 +1,39 @@
 # Quatro cloud
 
-Deploy Quatro on an Oracle Always Free ARM server. Use the GitHub Pages control
-page to open authenticated actions for Start, Stop, and Status.
+Quatro runs on the single included free X Systems Discord bot server: 4 GB RAM,
+200% CPU and 10 GB disk. The Oracle Always Free AMD micro server keeps the old
+files as a backup. RAM and CPU are separate on each host.
 
-The preferred target is 2 A1 cores, 12 GB RAM, and a 50 GB boot disk. Montreal
-rejected both 2-core and 1-core A1 requests because of host capacity on November
-8, 2026. The active deployment uses the fixed Always Free AMD micro shape with
-1 GB RAM and a 50 GB disk. Runtime checks must pass before the final migration.
-The controller accepts either approved shape. The provisioning tool still
-targets A1 for a future migration. Free availability
-depends on Oracle capacity and reclamation rules. Model availability depends on the selected provider's free offers. This project does not guarantee a zero bill or uptime.
+Use the [private dashboard](https://quatro-dashboard.lashtabeha-dmytro.workers.dev/)
+for chats, sessions, skills and settings. GitHub sign-in remains restricted to
+its owner. Use the [X Systems panel](https://panel.xsystemshosting.com/server/ab48b62b)
+for Start, Stop, Restart and current resource use.
 
-The live Windows setup is separate. This repository contains no personal memory,
-conversation history, Discord credentials, or cloud keys.
+The [Pages control page](https://limidotu.github.io/qatro-cloud/) links to the
+primary host and clearly labels the old GitHub power workflows as Oracle
+backup controls. Those workflows do not control the X Systems container.
 
-## State
+## Current deployment
 
-- The control page and workflows are implemented.
-- The Always Free server and dedicated control identity are provisioned.
-- The cloud gateway connects to Discord. A real Discord reply remains to be checked.
-- The PC gateway and its two restart tasks are disabled during the cloud switch.
-- The active cloud configuration uses Cloudflare Workers AI on its free plan.
-  Requests stop when its daily free allowance is exhausted.
-- The page can enable server controls after power tests pass. A running server does not mean the cloud bot is active.
-- The initial configuration includes only OpenCode free model IDs. The current
-  server uses a separately configured Cloudflare free model.
+- X Systems runs Hermes, OpenCode, Discord and the private dashboard stack.
+- OpenCode 2.2.5 uses `opencode/deepseek-v4.1-flash-free`. The provider guard
+  rejects other models. No paid fallback or trial credits are allowed.
+- A user-space supervisor starts and restarts the gateway, dashboard, GitHub
+  sign-in proxy, origin guard and outbound tunnel. The container has no systemd.
+- Memories, sessions, skills, rules and approved integration credentials stay in
+  private storage. This repository contains no private migration archive.
+- The old Oracle agent must stay stopped and disabled to avoid duplicate replies.
+  Its files remain available for recovery.
+- The Windows gateway and its restart tasks remain disabled.
+- The free host has account eligibility requirements and experienced network
+  outages during testing. Keep an independent backup. No uptime is guaranteed.
+
+## Oracle backup provisioning
+
+The scripts below provision Oracle resources and control that backup host.
+They do not provision or manage the active X Systems container. The preferred
+Oracle ARM target remains 2 A1 cores and 12 GB RAM, but Montreal capacity was
+unavailable during setup. Never select a paid fallback.
 
 ## Account setup
 
